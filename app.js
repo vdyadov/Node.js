@@ -1,11 +1,4 @@
-const os = require("os");
-const greeting = require("./greeting");
-const User = require("./user");
+const welcome = require("./welcome");
 
-let userName = os.userInfo().username;
-
-let me = new User("Vladislav", 18);
-me.sayHi();
-
-console.log(`Дата запроса: ${greeting.date}`);
-console.log(greeting.getMessage(userName));
+welcome.getMorningMessage();
+welcome.getEveningMessage();
