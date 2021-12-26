@@ -1,9 +1,17 @@
-const express = require("express");
+function display(data, callback) {
+    var randNum = Math.random() * (10 - 1) + 1;
+    var err = randNum > 5 ? new Error("Ошибка выполнения. randNum > 5") : null;
 
-const app = express();
+    setTimeout(function() {
+        callback(err, data);
+    }, 0);
+}
 
-app.get("/", function(request, response) {
-    response.end("Hello from Express");   
+console.log("Start programm!");
+
+display("Checking data...", function (err, data) {
+    if (err) throw err;
+    console.log(data);
 });
 
-app.listen(5000);
+console.log("Stop programm!");
