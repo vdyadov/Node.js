@@ -1,17 +1,11 @@
-const EventEmitter = require("events");
-  
-let eventName = "greet";
+const fs = require("fs");
  
-class User extends EventEmitter {
-    sayHi(data) {
-        this.emit(eventName, data);
-    }
-}
+let writeableStream = fs.createWriteStream("test.txt");
+writeableStream.write("Привет мир!\n");
+writeableStream.write("Продолжение записи \n");
+writeableStream.end("Завершение записи\n");
+let readableStream = fs.createReadStream("test.txt", "utf8");
  
-let user = new User();
-// добавляем к объекту user обработку события "greet"
-user.on(eventName, function(data){
-    console.log(data);
+readableStream.on("data", function(chunk){ 
+    console.log(chunk);
 });
-  
-user.sayHi("Мне нужна твоя одежда...");
