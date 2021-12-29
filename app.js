@@ -1,17 +1,11 @@
-function display(data, callback) {
-    var randNum = Math.random() * (10 - 1) + 1;
-    var err = randNum > 5 ? new Error("Ошибка выполнения. randNum > 5") : null;
+const fs = require("fs");
 
-    setTimeout(function() {
-        callback(err, data);
-    }, 0);
-}
-
-console.log("Start programm!");
-
-display("Checking data...", function (err, data) {
-    if (err) throw err;
-    console.log(data);
+fs.readFile("test.txt", "utf8", 
+    function (error, data) {
+        console.log("Асинхронное чтение");
+        if (error) throw err;
+        console.log(data);
 });
 
-console.log("Stop programm!");
+console.log("Cинхронное чтение");
+console.log(fs.readFileSync("test.txt", "utf8"));
