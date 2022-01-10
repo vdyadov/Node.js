@@ -2,12 +2,21 @@ const express = require("express");
  
 const app = express();
 
-app.use("/home", function (redirect, response) {
-    response.redirect("about");
+app.get("/", function(request, response) {
+    response.send("<h1>Главная страница</h1>");
 });
 
 app.use("/about", function(request, response) {
-    response.send("<h1>About</h1>");
+    
+    console.log(request.query);
+    let names = request.query.name;
+    let responseText = "<ul>";
+
+    for (let i = 0; i < names.length; i++) {
+        responseText += "<li>" + names[i] + "</li>";
+    }
+    responseText += "</ul>";
+    response.send(responseText);
 });
 
 app.listen(5000, () => console.log("Server started at 5000 port"));
